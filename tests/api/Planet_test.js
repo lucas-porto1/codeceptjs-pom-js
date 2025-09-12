@@ -5,20 +5,15 @@ const {I} = inject();
 
 Feature('Planets tests');
 
-
 Scenario('Should return 200 for a valid planet', async () => {
     const res = await I.sendGetRequest('/planets/1');
     expect(res.status).to.eql(200);
 });
 
-
 Scenario('Should return 404 for a non-existent planet', async () => {
     const res = await I.sendGetRequest('/planets/370');
     expect(res.status).to.eql(404);
 });
-
-// I put the validations (expect) in a single scenario to avoid making the reading too extensive.
-
 
 Scenario('Should return correct fields for Tatooine', async () => {
     const res = await I.sendGetRequest('/planets/1');
@@ -34,7 +29,6 @@ Scenario('Should return correct fields for Tatooine', async () => {
         population: "200000"
     });
 });
-
 
 Scenario('Should not match incorrect planet field values', async () => {
     const res = await I.sendGetRequest('/planets/1');

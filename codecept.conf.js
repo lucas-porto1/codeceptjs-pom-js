@@ -1,12 +1,12 @@
 exports.config = {
-	tests: "./*/*_test.js",
-	output: "./output",
+  tests: "./tests/api/*_test.js",
+  output: "./artifacts/output",
 	helpers: {
 		REST: {
-		//	timeout:"100000",  -- Retirar o comentário, caso tenha problema de timeout. A API também pode estar indisponível, verifique antes..
-			endpoint: "https://swapi.co",
+			endpoint: process.env.API_ENDPOINT || "https://swapi.dev/api",
 			onRequest: () => {
-				//request.headers.auth = "123";
+				// Set custom headers here if needed
+				// request.headers.auth = process.env.AUTH_TOKEN;
 			}
 		}
 	},
@@ -19,10 +19,11 @@ exports.config = {
 		}
 	},
 	name: "starwars-codeceptjs-lpg",
-	plugins: {
-		allure: {
-			outputDir: "report",
-			enabled: true
+		plugins: {
+			allure: {
+				enabled: true,
+				outputDir: "artifacts/report",
+				require: '@codeceptjs/allure-legacy'
+			}
 		}
-	}
 };

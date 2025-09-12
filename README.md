@@ -1,29 +1,62 @@
-# Introdução
-Este projeto foi desenvolvido como método de avaliação utilizando o codeceptjs.
 
-### Ferramentas uilizadas
 
-<https://nodejs.org/en/> <br>
-<https://codecept.io/> <br>
-<https://swapi.co/> 
+# Codecept Star Wars API Test Suite
 
-### Configuração do ambiente
-É necessário instalar o [Node.js](https://nodejs.org/) v8+ para rodar.
+This project is an automated API test suite for the Star Wars API (SWAPI), built with [CodeceptJS](https://codecept.io/) and [Chai](https://www.chaijs.com/). It demonstrates best practices for API testing, reporting, and maintainability.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) v14 or higher
+- npm (comes with Node.js)
+
+## Setup
+
+Clone the repository and install dependencies:
 
 ```sh
-cd starwars-codeceptjs-lpg
-npm i
+git clone https://github.com/lucas-porto1/codecept-star-wars.git
+cd codecept-star-wars
+npm install
 ```
 
-### Executando os testes
+## Usage
+
+### Run all tests
 
 ```sh
 npm test
 ```
 
+### Lint the code
 
-### Gerando o relatório em HTML, utilizando o Mocha (OPCIONAL).
+```sh
+npm run lint
+```
+
+### Generate an HTML report (optional)
 
 ```sh
 npx codeceptjs run --reporter mochawesome
 ```
+
+### Environment variables
+
+You can override the API endpoint by setting the `API_ENDPOINT` environment variable:
+
+```sh
+API_ENDPOINT=https://your-api-endpoint npm test
+```
+
+## Project Structure
+
+- `test/` - Contains all test files
+- `codecept.conf.js` - CodeceptJS configuration
+- `package.json` - Project metadata and scripts
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+ISC
