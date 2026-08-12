@@ -1,38 +1,53 @@
 {
-  "name": "starwars-codeceptjs-lpg",
+  "name": "codeceptjs-pom-js",
   "version": "1.0.0",
-  "description": "Project with REST and codeceptjs",
-  "main": "index.js",
+  "private": true,
+  "description": "Reusable CodeceptJS template for API and UI end-to-end testing.",
   "scripts": {
-    "start": "npm test",
-    "test": "codeceptjs run",
-    "lint": "eslint . --fix",
-    "prepare": "husky install"
+    "test": "npm run test:api && npm run test:ui",
+    "test:api": "codeceptjs run --grep @api --steps --profile api",
+    "test:ui": "codeceptjs run --grep @ui --steps --profile ui",
+    "test:ui:headed": "codeceptjs run --grep @ui --steps --profile headed",
+    "test:parallel": "codeceptjs run-workers 2 --by pool",
+    "check": "npm run lint && codeceptjs list",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "types": "codeceptjs def"
   },
   "keywords": [
+    "api-testing",
     "codeceptjs",
-    "rest"
+    "e2e-testing",
+    "page-object-model",
+    "playwright",
+    "ui-testing"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucas-porto1/codecept-star-wars.git"
+    "url": "git+https://github.com/lucas-porto1/codeceptjs-pom-js.git"
   },
-  "author": "lucas-porto1",
-  "license": "ISC",
+  "author": "Lucas Porto",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=24"
+  },
+  "overrides": {
+    "axios": "1.19.0",
+    "diff": "8.0.3",
+    "serialize-javascript": "7.1.0",
+    "undici": "6.28.0",
+    "uuid": "11.1.1"
+  },
   "devDependencies": {
-    "@codeceptjs/allure-legacy": "^1.0.2",
-    "@eslint/js": "^9.35.0",
-    "chai": "^4.4.1",
-    "codeceptjs": "^3.7.4",
-    "eslint": "^9.35.0",
-    "eslint-plugin-codeceptjs": "^1.1.0",
-    "faker": "^5.5.3",
-    "globals": "^16.4.0",
-    "husky": "^9.0.11",
-    "mochawesome": "^7.1.3"
+    "@eslint/js": "10.0.1",
+    "codeceptjs": "4.1.0",
+    "dotenv": "17.4.2",
+    "eslint": "10.8.1",
+    "globals": "17.10.0",
+    "playwright": "1.62.1",
+    "tsx": "4.23.12"
   },
-  "dependencies": {
-    "allure-commandline": "^2.13.0",
-    "form-data": "^4.0.0"
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }
