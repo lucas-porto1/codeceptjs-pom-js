@@ -29,6 +29,7 @@ Both targets are public demonstration services. Replace them with authorized env
 - Planet resource, relationships, and 404 response
 - Film resource and relationships
 - Starship resource and 404 response
+- Available API resources
 
 ## Project Structure
 
@@ -76,7 +77,7 @@ Both targets are public demonstration services. Replace them with authorized env
 - `support/auth.js` defines the reusable authenticated session lifecycle.
 - `support/steps_file.js` is the CodeceptJS actor extension point for future application-wide actions.
 - `steps.d.ts` provides CodeceptJS and Page Object autocomplete while tests remain in JavaScript.
-- `artifacts/` is generated only when needed and is ignored by Git.
+- `artifacts/` contains generated reports and failure screenshots and is ignored by Git.
 
 Page Objects are used only for shared UI behavior. API requests remain visible in their tests because an additional routing layer would not improve this small example.
 
@@ -128,6 +129,12 @@ Run the complete suite:
 
 ```bash
 npm test
+```
+
+Run the smoke scenarios across API and UI:
+
+```bash
+npm run test:smoke
 ```
 
 Run only API tests without starting a browser:
@@ -206,6 +213,6 @@ Reports and failure screenshots are generated locally under `artifacts/` and are
 
 ## Continuous Integration
 
-GitHub Actions uses Node 24, installs Chromium, validates the project, and runs API and UI tests. HTML reports and failure screenshots are retained for seven days. Full public demo values are defined directly in the workflow, so this template requires no repository secrets.
+GitHub Actions uses Node 24, installs Chromium, validates the project, and runs API and UI tests. Older runs for the same Git reference are automatically cancelled when a newer run starts. HTML reports and failure screenshots are retained for seven days. Full public demo values are defined directly in the workflow, so this template requires no repository secrets.
 
 Dependabot checks npm packages and GitHub Actions every six months. The lockfile is versioned to keep local and CI installations reproducible.

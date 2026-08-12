@@ -5,6 +5,7 @@
   "description": "Reusable CodeceptJS template for API and UI end-to-end testing.",
   "scripts": {
     "test": "npm run test:api && npm run test:ui",
+    "test:smoke": "codeceptjs run --grep @smoke --steps",
     "test:api": "codeceptjs run --grep @api --steps --profile api",
     "test:ui": "codeceptjs run --grep @ui --steps --profile ui",
     "test:ui:headed": "codeceptjs run --grep @ui --steps --profile headed",
@@ -34,13 +35,27 @@
     "node": ">=24"
   },
   "overrides": {
-    "axios": "1.19.0",
-    "diff": "8.0.3",
-    "serialize-javascript": "7.1.0",
-    "reflect-metadata": "0.2.2",
-    "tmp": "0.2.7",
-    "undici": "6.28.0",
-    "uuid": "11.1.1"
+    "@ai-sdk/provider-utils": {
+      "undici": "6.28.0"
+    },
+    "@cucumber/cucumber": {
+      "tmp": "0.2.7"
+    },
+    "@cucumber/messages": {
+      "reflect-metadata": "0.2.2",
+      "uuid": "11.1.1"
+    },
+    "@testomatio/reporter": {
+      "uuid": "11.1.1"
+    },
+    "codeceptjs": {
+      "axios": "1.19.0",
+      "uuid": "11.1.1"
+    },
+    "mocha": {
+      "diff": "8.0.3",
+      "serialize-javascript": "7.1.0"
+    }
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
