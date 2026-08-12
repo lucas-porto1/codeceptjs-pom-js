@@ -1,10 +1,7 @@
-const users = require("../../test-data/users");
-
 Feature("Inventory @ui");
 
-Before(({ loginPage }) => {
-  loginPage.open();
-  loginPage.loginAs(users.standard.username, users.standard.password);
+Before(({ loginAs }) => {
+  loginAs("standard");
 });
 
 Scenario("displays the product catalog", ({ inventoryPage }) => {

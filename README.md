@@ -43,6 +43,7 @@ Both targets are public demonstration services. Replace them with authorized env
 |   |-- inventory_page.js
 |   `-- login_page.js
 |-- support/
+|   |-- auth.js
 |   `-- steps_file.js
 |-- test-data/
 |   |-- api/star_wars.js
@@ -72,6 +73,7 @@ Both targets are public demonstration services. Replace them with authorized env
 - `tests/` contains readable business scenarios grouped by test type.
 - `pages/` contains UI locators and reusable page actions.
 - `test-data/` contains environment-independent inputs and expected API data.
+- `support/auth.js` defines the reusable authenticated session lifecycle.
 - `support/steps_file.js` is the CodeceptJS actor extension point for future application-wide actions.
 - `steps.d.ts` provides CodeceptJS and Page Object autocomplete while tests remain in JavaScript.
 - `artifacts/` is generated only when needed and is ignored by Git.
@@ -146,10 +148,17 @@ Run UI tests with the browser visible:
 npm run test:ui:headed
 ```
 
-Run scenarios with two workers:
+Run API and UI suites separately with two workers:
 
 ```bash
 npm run test:parallel
+```
+
+Run only one test type in parallel:
+
+```bash
+npm run test:api:parallel
+npm run test:ui:parallel
 ```
 
 Validate lint and the CodeceptJS configuration:
@@ -182,8 +191,21 @@ When adding an API resource:
 
 Create fragments, Step Objects, custom helpers, or additional configuration modules only when repeated behavior justifies them.
 
+## Authentication and Reports
+
+The CodeceptJS `auth` plugin performs the standard-user login once and reuses its cookie for authenticated scenarios. Authentication tests still use `loginPage` directly because they validate the login behavior itself.
+
+Each execution creates a self-contained HTML report:
+
+```text
+artifacts/report/api/testomatio-report.html
+artifacts/report/ui/testomatio-report.html
+```
+
+Reports and failure screenshots are generated locally under `artifacts/` and are not committed.
+
 ## Continuous Integration
 
-GitHub Actions uses Node 24, installs Chromium, validates the project, and runs API and UI tests. Failure screenshots are retained for seven days. Full public demo values are defined directly in the workflow, so this template requires no repository secrets.
+GitHub Actions uses Node 24, installs Chromium, validates the project, and runs API and UI tests. HTML reports and failure screenshots are retained for seven days. Full public demo values are defined directly in the workflow, so this template requires no repository secrets.
 
 Dependabot checks npm packages and GitHub Actions every six months. The lockfile is versioned to keep local and CI installations reproducible.

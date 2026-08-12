@@ -1,11 +1,9 @@
 const checkout = require("../../test-data/checkout");
-const users = require("../../test-data/users");
 
 Feature("Checkout @ui");
 
-Before(({ loginPage }) => {
-  loginPage.open();
-  loginPage.loginAs(users.standard.username, users.standard.password);
+Before(({ loginAs }) => {
+  loginAs("standard");
 });
 
 Scenario("completes an order @smoke", ({ inventoryPage, cartPage, checkoutPage }) => {

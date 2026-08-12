@@ -48,10 +48,23 @@ exports.config = {
   mocha: {},
   name: "codeceptjs-pom-js",
   plugins: {
+    ...(!isApiProfile && {
+      auth: {
+        enabled: true,
+        inject: "loginAs",
+        users: require("./support/auth"),
+      },
+    }),
     screenshot: {
       enabled: true,
       on: "fail",
       uniqueScreenshotNames: true,
+    },
+    testomatio: {
+      enabled: true,
+      require: "@testomatio/reporter/codecept",
+      html: true,
+      reportDir: `artifacts/report/${process.env.profile || "all"}`,
     },
   },
 };

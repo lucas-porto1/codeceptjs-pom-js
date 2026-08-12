@@ -42,9 +42,9 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Upload failure artifacts
-        if: failure()
-        uses: actions/upload-artifact@v6
+      - name: Upload test reports and failure artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
         with:
           name: codeceptjs-artifacts
           path: artifacts/
