@@ -1,12 +1,20 @@
-# CodeceptJS POM JavaScript
+# CodeceptJS POM — JavaScript Reference
 
-[![Node.js](https://img.shields.io/badge/Node.js-24_LTS-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![CodeceptJS](https://img.shields.io/badge/CodeceptJS-4.1.0-7B68EE.svg)](https://codecept.io/)
-[![CI](https://github.com/lucas-porto1/codeceptjs-pom-js/actions/workflows/ci.yml/badge.svg)](https://github.com/lucas-porto1/codeceptjs-pom-js/actions/workflows/ci.yml)
+[![CI](https://github.com/lucas-porto1/codeceptjs-pom-js/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lucas-porto1/codeceptjs-pom-js/actions/workflows/ci.yml)
+
+_Part of [Lucas Porto's QA Automation Reference Collection](https://github.com/lucas-porto1): QA-first templates built for readability, reproducibility, and sustainable maintenance._
 
 A reusable CodeceptJS reference project written in JavaScript. It demonstrates Page Object Model for UI automation with the Playwright helper and REST API testing in the same repository while keeping each test type independently executable.
 
-## Test Targets
+## Design principles
+
+- **Keep scenarios readable:** business behavior and assertions remain visible in the test files.
+- **Use Page Objects with purpose:** shared UI selectors and interactions belong in `pages/`, while one-off actions stay visible in tests.
+- **Keep API requests direct:** CodeceptJS REST actions remain in API tests when another abstraction would not improve readability.
+- **Reuse authentication safely:** authenticated scenarios share a managed session without making tests depend on execution order.
+- **Keep test types independent:** API and UI suites can run separately or together locally and in CI.
+
+## Test targets
 
 - UI: [SauceDemo](https://www.saucedemo.com/)
 - API: [SWAPI.INFO](https://swapi.info/), a file-based Star Wars API compatible with the resources used by the original SWAPI project
@@ -31,7 +39,7 @@ Both targets are public demonstration services. Replace them with authorized env
 - Starship resource and 404 response
 - Available API resources
 
-## Project Structure
+## Project structure
 
 ```text
 .
@@ -88,7 +96,7 @@ Page Objects are used only for shared UI behavior. API requests remain visible i
 
 The `.nvmrc` file allows compatible Node version managers to select Node 24 automatically.
 
-## Setup
+## Getting started
 
 Clone and install the project:
 
@@ -111,7 +119,7 @@ Copy-Item .env.example .env
 cp .env.example .env
 ```
 
-## Environment Variables
+## Environment variables
 
 ```env
 WEB_URL=https://www.saucedemo.com
@@ -180,7 +188,7 @@ Regenerate IDE autocomplete definitions after changing helpers or Page Objects:
 npm run types
 ```
 
-## Architecture Guidelines
+## Adding a scenario
 
 When adding a UI feature:
 
@@ -198,7 +206,7 @@ When adding an API resource:
 
 Create fragments, Step Objects, custom helpers, or additional configuration modules only when repeated behavior justifies them.
 
-## Authentication and Reports
+## Authentication and reports
 
 The CodeceptJS `auth` plugin performs the standard-user login once and reuses its cookie for authenticated scenarios. Authentication tests still use `loginPage` directly because they validate the login behavior itself.
 
@@ -211,7 +219,7 @@ artifacts/report/ui/testomatio-report.html
 
 Reports and failure screenshots are generated locally under `artifacts/` and are not committed.
 
-## Continuous Integration
+## Continuous integration
 
 GitHub Actions uses Node 24, installs Chromium, validates the project, and runs API and UI tests. Older runs for the same Git reference are automatically cancelled when a newer run starts. HTML reports and failure screenshots are retained for seven days. Full public demo values are defined directly in the workflow, so this template requires no repository secrets.
 
