@@ -219,8 +219,17 @@ artifacts/report/ui/testomatio-report.html
 
 Reports and failure screenshots are generated locally under `artifacts/` and are not committed.
 
+The latest reports from `main` can be opened directly without downloading an artifact:
+
+- [UI report](https://lucas-porto1.github.io/codeceptjs-pom-js/)
+- [API report](https://lucas-porto1.github.io/codeceptjs-pom-js/api/)
+
 ## Continuous integration
 
-GitHub Actions uses Node 24, installs Chromium, validates the project, and runs API and UI tests. Older runs for the same Git reference are automatically cancelled when a newer run starts. HTML reports and failure screenshots are retained for seven days. Full public demo values are defined directly in the workflow, so this template requires no repository secrets.
+GitHub Actions uses Node 24, installs Chromium, validates the project, and runs API and UI tests. Older runs for the same Git reference are automatically cancelled when a newer run starts. Runs on `main` publish both HTML reports to GitHub Pages and add direct links to the job summary. Pull requests do not replace the published reports; HTML reports and screenshots are retained as a short-lived artifact only when a run fails. Full public demo values are defined directly in the workflow, so this template requires no repository secrets.
+
+Before the first deployment, select **GitHub Actions** as the Pages source under the repository's **Settings > Pages**.
+
+Reports and screenshots can contain test data. Disable public Pages publishing or use access-controlled reporting infrastructure before reusing this setup with sensitive client systems.
 
 Dependabot checks npm packages and GitHub Actions every six months. The lockfile is versioned to keep local and CI installations reproducible.
